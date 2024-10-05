@@ -1,0 +1,482 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> programa
+Rule 1     programa -> PR ID PARIZQ PARDER bloque
+Rule 2     programa -> PR ID PARIZQ PARDER PUNTOYCOMA bloque
+Rule 3     bloque -> declaraciones bloque
+Rule 4     bloque -> expresion bloque
+Rule 5     bloque -> empty
+Rule 6     declaraciones -> PR tipo ID PUNTOYCOMA
+Rule 7     declaraciones -> PR tipo ID IGUAL expresion PUNTOYCOMA
+Rule 8     tipo -> PR
+Rule 9     expresion -> ID IGUAL expresion
+Rule 10    expresion -> termino SUMA termino
+Rule 11    expresion -> termino REST termino
+Rule 12    expresion -> termino MULT termino
+Rule 13    expresion -> termino DIV termino
+Rule 14    termino -> NUM
+Rule 15    termino -> ID
+Rule 16    empty -> <empty>
+
+Terminals, with rules where they appear
+
+DIV                  : 13
+ID                   : 1 2 6 7 9 15
+IGUAL                : 7 9
+MULT                 : 12
+NUM                  : 14
+PARDER               : 1 2
+PARIZQ               : 1 2
+PR                   : 1 2 6 7 8
+PUNTOYCOMA           : 2 6 7
+REST                 : 11
+SUMA                 : 10
+error                : 
+
+Nonterminals, with rules where they appear
+
+bloque               : 1 2 3 4
+declaraciones        : 3
+empty                : 5
+expresion            : 4 7 9
+programa             : 0
+termino              : 10 10 11 11 12 12 13 13
+tipo                 : 6 7
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . programa
+    (1) programa -> . PR ID PARIZQ PARDER bloque
+    (2) programa -> . PR ID PARIZQ PARDER PUNTOYCOMA bloque
+
+    PR              shift and go to state 2
+
+    programa                       shift and go to state 1
+
+state 1
+
+    (0) S' -> programa .
+
+
+
+state 2
+
+    (1) programa -> PR . ID PARIZQ PARDER bloque
+    (2) programa -> PR . ID PARIZQ PARDER PUNTOYCOMA bloque
+
+    ID              shift and go to state 3
+
+
+state 3
+
+    (1) programa -> PR ID . PARIZQ PARDER bloque
+    (2) programa -> PR ID . PARIZQ PARDER PUNTOYCOMA bloque
+
+    PARIZQ          shift and go to state 4
+
+
+state 4
+
+    (1) programa -> PR ID PARIZQ . PARDER bloque
+    (2) programa -> PR ID PARIZQ . PARDER PUNTOYCOMA bloque
+
+    PARDER          shift and go to state 5
+
+
+state 5
+
+    (1) programa -> PR ID PARIZQ PARDER . bloque
+    (2) programa -> PR ID PARIZQ PARDER . PUNTOYCOMA bloque
+    (3) bloque -> . declaraciones bloque
+    (4) bloque -> . expresion bloque
+    (5) bloque -> . empty
+    (6) declaraciones -> . PR tipo ID PUNTOYCOMA
+    (7) declaraciones -> . PR tipo ID IGUAL expresion PUNTOYCOMA
+    (9) expresion -> . ID IGUAL expresion
+    (10) expresion -> . termino SUMA termino
+    (11) expresion -> . termino REST termino
+    (12) expresion -> . termino MULT termino
+    (13) expresion -> . termino DIV termino
+    (16) empty -> .
+    (14) termino -> . NUM
+    (15) termino -> . ID
+
+    PUNTOYCOMA      shift and go to state 9
+    PR              shift and go to state 6
+    ID              shift and go to state 7
+    $end            reduce using rule 16 (empty -> .)
+    NUM             shift and go to state 14
+
+    bloque                         shift and go to state 8
+    declaraciones                  shift and go to state 10
+    expresion                      shift and go to state 11
+    empty                          shift and go to state 12
+    termino                        shift and go to state 13
+
+state 6
+
+    (6) declaraciones -> PR . tipo ID PUNTOYCOMA
+    (7) declaraciones -> PR . tipo ID IGUAL expresion PUNTOYCOMA
+    (8) tipo -> . PR
+
+    PR              shift and go to state 15
+
+    tipo                           shift and go to state 16
+
+state 7
+
+    (9) expresion -> ID . IGUAL expresion
+    (15) termino -> ID .
+
+    IGUAL           shift and go to state 17
+    SUMA            reduce using rule 15 (termino -> ID .)
+    REST            reduce using rule 15 (termino -> ID .)
+    MULT            reduce using rule 15 (termino -> ID .)
+    DIV             reduce using rule 15 (termino -> ID .)
+
+
+state 8
+
+    (1) programa -> PR ID PARIZQ PARDER bloque .
+
+    $end            reduce using rule 1 (programa -> PR ID PARIZQ PARDER bloque .)
+
+
+state 9
+
+    (2) programa -> PR ID PARIZQ PARDER PUNTOYCOMA . bloque
+    (3) bloque -> . declaraciones bloque
+    (4) bloque -> . expresion bloque
+    (5) bloque -> . empty
+    (6) declaraciones -> . PR tipo ID PUNTOYCOMA
+    (7) declaraciones -> . PR tipo ID IGUAL expresion PUNTOYCOMA
+    (9) expresion -> . ID IGUAL expresion
+    (10) expresion -> . termino SUMA termino
+    (11) expresion -> . termino REST termino
+    (12) expresion -> . termino MULT termino
+    (13) expresion -> . termino DIV termino
+    (16) empty -> .
+    (14) termino -> . NUM
+    (15) termino -> . ID
+
+    PR              shift and go to state 6
+    ID              shift and go to state 7
+    $end            reduce using rule 16 (empty -> .)
+    NUM             shift and go to state 14
+
+    bloque                         shift and go to state 18
+    declaraciones                  shift and go to state 10
+    expresion                      shift and go to state 11
+    empty                          shift and go to state 12
+    termino                        shift and go to state 13
+
+state 10
+
+    (3) bloque -> declaraciones . bloque
+    (3) bloque -> . declaraciones bloque
+    (4) bloque -> . expresion bloque
+    (5) bloque -> . empty
+    (6) declaraciones -> . PR tipo ID PUNTOYCOMA
+    (7) declaraciones -> . PR tipo ID IGUAL expresion PUNTOYCOMA
+    (9) expresion -> . ID IGUAL expresion
+    (10) expresion -> . termino SUMA termino
+    (11) expresion -> . termino REST termino
+    (12) expresion -> . termino MULT termino
+    (13) expresion -> . termino DIV termino
+    (16) empty -> .
+    (14) termino -> . NUM
+    (15) termino -> . ID
+
+    PR              shift and go to state 6
+    ID              shift and go to state 7
+    $end            reduce using rule 16 (empty -> .)
+    NUM             shift and go to state 14
+
+    declaraciones                  shift and go to state 10
+    bloque                         shift and go to state 19
+    expresion                      shift and go to state 11
+    empty                          shift and go to state 12
+    termino                        shift and go to state 13
+
+state 11
+
+    (4) bloque -> expresion . bloque
+    (3) bloque -> . declaraciones bloque
+    (4) bloque -> . expresion bloque
+    (5) bloque -> . empty
+    (6) declaraciones -> . PR tipo ID PUNTOYCOMA
+    (7) declaraciones -> . PR tipo ID IGUAL expresion PUNTOYCOMA
+    (9) expresion -> . ID IGUAL expresion
+    (10) expresion -> . termino SUMA termino
+    (11) expresion -> . termino REST termino
+    (12) expresion -> . termino MULT termino
+    (13) expresion -> . termino DIV termino
+    (16) empty -> .
+    (14) termino -> . NUM
+    (15) termino -> . ID
+
+    PR              shift and go to state 6
+    ID              shift and go to state 7
+    $end            reduce using rule 16 (empty -> .)
+    NUM             shift and go to state 14
+
+    expresion                      shift and go to state 11
+    bloque                         shift and go to state 20
+    declaraciones                  shift and go to state 10
+    empty                          shift and go to state 12
+    termino                        shift and go to state 13
+
+state 12
+
+    (5) bloque -> empty .
+
+    $end            reduce using rule 5 (bloque -> empty .)
+
+
+state 13
+
+    (10) expresion -> termino . SUMA termino
+    (11) expresion -> termino . REST termino
+    (12) expresion -> termino . MULT termino
+    (13) expresion -> termino . DIV termino
+
+    SUMA            shift and go to state 21
+    REST            shift and go to state 22
+    MULT            shift and go to state 23
+    DIV             shift and go to state 24
+
+
+state 14
+
+    (14) termino -> NUM .
+
+    SUMA            reduce using rule 14 (termino -> NUM .)
+    REST            reduce using rule 14 (termino -> NUM .)
+    MULT            reduce using rule 14 (termino -> NUM .)
+    DIV             reduce using rule 14 (termino -> NUM .)
+    PR              reduce using rule 14 (termino -> NUM .)
+    ID              reduce using rule 14 (termino -> NUM .)
+    NUM             reduce using rule 14 (termino -> NUM .)
+    $end            reduce using rule 14 (termino -> NUM .)
+    PUNTOYCOMA      reduce using rule 14 (termino -> NUM .)
+
+
+state 15
+
+    (8) tipo -> PR .
+
+    ID              reduce using rule 8 (tipo -> PR .)
+
+
+state 16
+
+    (6) declaraciones -> PR tipo . ID PUNTOYCOMA
+    (7) declaraciones -> PR tipo . ID IGUAL expresion PUNTOYCOMA
+
+    ID              shift and go to state 25
+
+
+state 17
+
+    (9) expresion -> ID IGUAL . expresion
+    (9) expresion -> . ID IGUAL expresion
+    (10) expresion -> . termino SUMA termino
+    (11) expresion -> . termino REST termino
+    (12) expresion -> . termino MULT termino
+    (13) expresion -> . termino DIV termino
+    (14) termino -> . NUM
+    (15) termino -> . ID
+
+    ID              shift and go to state 7
+    NUM             shift and go to state 14
+
+    expresion                      shift and go to state 26
+    termino                        shift and go to state 13
+
+state 18
+
+    (2) programa -> PR ID PARIZQ PARDER PUNTOYCOMA bloque .
+
+    $end            reduce using rule 2 (programa -> PR ID PARIZQ PARDER PUNTOYCOMA bloque .)
+
+
+state 19
+
+    (3) bloque -> declaraciones bloque .
+
+    $end            reduce using rule 3 (bloque -> declaraciones bloque .)
+
+
+state 20
+
+    (4) bloque -> expresion bloque .
+
+    $end            reduce using rule 4 (bloque -> expresion bloque .)
+
+
+state 21
+
+    (10) expresion -> termino SUMA . termino
+    (14) termino -> . NUM
+    (15) termino -> . ID
+
+    NUM             shift and go to state 14
+    ID              shift and go to state 28
+
+    termino                        shift and go to state 27
+
+state 22
+
+    (11) expresion -> termino REST . termino
+    (14) termino -> . NUM
+    (15) termino -> . ID
+
+    NUM             shift and go to state 14
+    ID              shift and go to state 28
+
+    termino                        shift and go to state 29
+
+state 23
+
+    (12) expresion -> termino MULT . termino
+    (14) termino -> . NUM
+    (15) termino -> . ID
+
+    NUM             shift and go to state 14
+    ID              shift and go to state 28
+
+    termino                        shift and go to state 30
+
+state 24
+
+    (13) expresion -> termino DIV . termino
+    (14) termino -> . NUM
+    (15) termino -> . ID
+
+    NUM             shift and go to state 14
+    ID              shift and go to state 28
+
+    termino                        shift and go to state 31
+
+state 25
+
+    (6) declaraciones -> PR tipo ID . PUNTOYCOMA
+    (7) declaraciones -> PR tipo ID . IGUAL expresion PUNTOYCOMA
+
+    PUNTOYCOMA      shift and go to state 32
+    IGUAL           shift and go to state 33
+
+
+state 26
+
+    (9) expresion -> ID IGUAL expresion .
+
+    PR              reduce using rule 9 (expresion -> ID IGUAL expresion .)
+    ID              reduce using rule 9 (expresion -> ID IGUAL expresion .)
+    NUM             reduce using rule 9 (expresion -> ID IGUAL expresion .)
+    $end            reduce using rule 9 (expresion -> ID IGUAL expresion .)
+    PUNTOYCOMA      reduce using rule 9 (expresion -> ID IGUAL expresion .)
+
+
+state 27
+
+    (10) expresion -> termino SUMA termino .
+
+    PR              reduce using rule 10 (expresion -> termino SUMA termino .)
+    ID              reduce using rule 10 (expresion -> termino SUMA termino .)
+    NUM             reduce using rule 10 (expresion -> termino SUMA termino .)
+    $end            reduce using rule 10 (expresion -> termino SUMA termino .)
+    PUNTOYCOMA      reduce using rule 10 (expresion -> termino SUMA termino .)
+
+
+state 28
+
+    (15) termino -> ID .
+
+    PR              reduce using rule 15 (termino -> ID .)
+    ID              reduce using rule 15 (termino -> ID .)
+    NUM             reduce using rule 15 (termino -> ID .)
+    $end            reduce using rule 15 (termino -> ID .)
+    PUNTOYCOMA      reduce using rule 15 (termino -> ID .)
+
+
+state 29
+
+    (11) expresion -> termino REST termino .
+
+    PR              reduce using rule 11 (expresion -> termino REST termino .)
+    ID              reduce using rule 11 (expresion -> termino REST termino .)
+    NUM             reduce using rule 11 (expresion -> termino REST termino .)
+    $end            reduce using rule 11 (expresion -> termino REST termino .)
+    PUNTOYCOMA      reduce using rule 11 (expresion -> termino REST termino .)
+
+
+state 30
+
+    (12) expresion -> termino MULT termino .
+
+    PR              reduce using rule 12 (expresion -> termino MULT termino .)
+    ID              reduce using rule 12 (expresion -> termino MULT termino .)
+    NUM             reduce using rule 12 (expresion -> termino MULT termino .)
+    $end            reduce using rule 12 (expresion -> termino MULT termino .)
+    PUNTOYCOMA      reduce using rule 12 (expresion -> termino MULT termino .)
+
+
+state 31
+
+    (13) expresion -> termino DIV termino .
+
+    PR              reduce using rule 13 (expresion -> termino DIV termino .)
+    ID              reduce using rule 13 (expresion -> termino DIV termino .)
+    NUM             reduce using rule 13 (expresion -> termino DIV termino .)
+    $end            reduce using rule 13 (expresion -> termino DIV termino .)
+    PUNTOYCOMA      reduce using rule 13 (expresion -> termino DIV termino .)
+
+
+state 32
+
+    (6) declaraciones -> PR tipo ID PUNTOYCOMA .
+
+    PR              reduce using rule 6 (declaraciones -> PR tipo ID PUNTOYCOMA .)
+    ID              reduce using rule 6 (declaraciones -> PR tipo ID PUNTOYCOMA .)
+    NUM             reduce using rule 6 (declaraciones -> PR tipo ID PUNTOYCOMA .)
+    $end            reduce using rule 6 (declaraciones -> PR tipo ID PUNTOYCOMA .)
+
+
+state 33
+
+    (7) declaraciones -> PR tipo ID IGUAL . expresion PUNTOYCOMA
+    (9) expresion -> . ID IGUAL expresion
+    (10) expresion -> . termino SUMA termino
+    (11) expresion -> . termino REST termino
+    (12) expresion -> . termino MULT termino
+    (13) expresion -> . termino DIV termino
+    (14) termino -> . NUM
+    (15) termino -> . ID
+
+    ID              shift and go to state 7
+    NUM             shift and go to state 14
+
+    expresion                      shift and go to state 34
+    termino                        shift and go to state 13
+
+state 34
+
+    (7) declaraciones -> PR tipo ID IGUAL expresion . PUNTOYCOMA
+
+    PUNTOYCOMA      shift and go to state 35
+
+
+state 35
+
+    (7) declaraciones -> PR tipo ID IGUAL expresion PUNTOYCOMA .
+
+    PR              reduce using rule 7 (declaraciones -> PR tipo ID IGUAL expresion PUNTOYCOMA .)
+    ID              reduce using rule 7 (declaraciones -> PR tipo ID IGUAL expresion PUNTOYCOMA .)
+    NUM             reduce using rule 7 (declaraciones -> PR tipo ID IGUAL expresion PUNTOYCOMA .)
+    $end            reduce using rule 7 (declaraciones -> PR tipo ID IGUAL expresion PUNTOYCOMA .)
+

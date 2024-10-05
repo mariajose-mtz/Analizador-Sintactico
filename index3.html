@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analizador Léxico y Sintáctico</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 20px;
+        }
+        h1 {
+            font-size: 24px;
+            text-align: center;
+            color: #333;
+        }
+        form {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        textarea {
+            width: 100%;
+            height: 180px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            font-family: 'Courier New', Courier, monospace;
+            resize: none;
+        }
+        .button-group {
+            text-align: center;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 0 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .table-container {
+            margin-top: 20px;
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #007BFF;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .alert {
+            background-color: #ffdddd;
+            color: #d8000c;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-left: 6px solid #f44336;
+        }
+        .token-counter {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .token-counter ul {
+            list-style: none;
+            padding: 0;
+            font-size: 16px;
+        }
+        .token-counter li {
+            background: #007BFF;
+            color: white;
+            padding: 10px;
+            margin-bottom: 5px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Analizador Léxico y Sintáctico</h1>
+        <form method="post">
+            <textarea name="text" placeholder="Inserte su código aquí...">{{ text }}</textarea>
+            <div class="button-group">
+                <button type="submit">Analizar</button>
+                <button type="button" onclick="document.querySelector('textarea').value = '';">Borrar</button>
+            </div>
+        </form>
+
+        <!-- Tabla de Tokens Encontrados -->
+        <div class="table-container">
+            <h2>Tokens Encontrados</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Línea</th>
+                        <th>Token</th>
+                        <th>Palabra Reservada</th>
+                        <th>Identificador</th>
+                        <th>Número</th>
+                        <th>Símbolo</th>
+                        <th>Tipo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if tokens %}
+                        {% for token in tokens %}
+                        <tr>
+                            <td>{{ token.linea }}</td>
+                            <td>{{ token.token }}</td>
+                            <td>{{ token.PR }}</td>
+                            <td>{{ token.ID }}</td>
+                            <td>{{ token.Numero }}</td>
+                            <td>{{ token.Simbolo }}</td>
+                            <td>{{ token.tipo }}</td>
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="7">No se encontraron tokens.</td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Errores Sintácticos -->
+        <h2>Errores Sintácticos</h2>
+        {% if errores %}
+            <div class="alert">
+                <ul>
+                    {% for error in errores %}
+                        <li>Error en la línea {{ error[0] }}: {{ error[1] }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% else %}
+            <p style="text-align:center;">No se encontraron errores sintácticos.</p>
+        {% endif %}
+
+        <!-- Contador de Tokens -->
+        <div class="token-counter">
+            <h2>Contador de Tokens</h2>
+            <ul>
+                <li>Palabras Reservadas: {{ contador['Palabras Reservadas'] }}</li>
+                <li>Identificadores: {{ contador['Identificadores'] }}</li>
+                <li>Números: {{ contador['Numeros'] }}</li>
+                <li>Simbolos: {{ contador['Simbolos'] }}</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
